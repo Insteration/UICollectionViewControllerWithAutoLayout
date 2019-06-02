@@ -81,3 +81,16 @@ class BigViewController: CollectionViewController {
         navigationController?.popViewController(animated: true)
     }
 }
+
+
+extension CollectionViewController: UINavigationControllerDelegate {
+    
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        guard let collectionVC = viewController as? CollectionViewController else { return }
+        collectionVC.collectionView?.delegate = collectionVC
+        collectionVC.collectionView?.dataSource = collectionVC
+    }
+}
+
+//Во-первых, в момент когда происходит магия, используется повторно один и тот же UICollectionView. Контроллер, на который осуществляется переход не создает свой собственный collection view. Это может иметь или не иметь значения для вашего приложения, но об этом полезно знать.
+//Во-вторых, root view controller (SmallViewController в нашем случае) по-прежнему будет установлен как delegate и dataSource, когда будет запущен новый view controller.
