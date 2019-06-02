@@ -10,7 +10,6 @@ import UIKit
 
 private let reuseIdentifier = "Cell"
 
-
 class CollectionViewController: UICollectionViewController {
     
     var items = [Item]()
@@ -38,13 +37,9 @@ class CollectionViewController: UICollectionViewController {
         cell.backgroundColor = items[indexPath.row].color
         return cell
     }
-    
-
 }
 
-
-
-// MARK: Small squares
+// MARK: Controllers
 
 class SmallViewController: CollectionViewController {
     
@@ -52,6 +47,7 @@ class SmallViewController: CollectionViewController {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: 50, height: 50)
         super.init(collectionViewLayout: layout)
+        useLayoutToLayoutNavigationTransitions = false
         items = (0...50).map { _ in Item(color: .random()) }
     }
     
@@ -74,6 +70,7 @@ class BigViewController: CollectionViewController {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: 100, height: 100)
         super.init(collectionViewLayout: layout)
+        useLayoutToLayoutNavigationTransitions = true
     }
     
     required init?(coder aDecoder: NSCoder) {
