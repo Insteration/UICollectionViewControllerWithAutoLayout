@@ -47,6 +47,7 @@ class SmallViewController: CollectionViewController {
         layout.itemSize = CGSize(width: 50, height: 50)
         super.init(collectionViewLayout: layout)
         useLayoutToLayoutNavigationTransitions = false
+        title = "Small cells"
         items = (0...50).map { _ in Item(color: .random()) }
     }
     
@@ -69,6 +70,7 @@ class BigViewController: CollectionViewController {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: 100, height: 100)
         super.init(collectionViewLayout: layout)
+        title = "Big cells"
         useLayoutToLayoutNavigationTransitions = true
     }
     
@@ -88,7 +90,6 @@ extension CollectionViewController: UINavigationControllerDelegate {
         guard let collectionVC = viewController as? CollectionViewController else { return }
         collectionVC.collectionView?.delegate = collectionVC
         collectionVC.collectionView?.dataSource = collectionVC
-        print("Datasource and delegate check")
     }
 }
 
