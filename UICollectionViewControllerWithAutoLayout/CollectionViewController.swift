@@ -26,7 +26,6 @@ class CollectionViewController: UICollectionViewController {
     // MARK: UICollectionViewDataSource
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
         return items.count
     }
 
@@ -89,6 +88,7 @@ extension CollectionViewController: UINavigationControllerDelegate {
         guard let collectionVC = viewController as? CollectionViewController else { return }
         collectionVC.collectionView?.delegate = collectionVC
         collectionVC.collectionView?.dataSource = collectionVC
+        print("Datasource and delegate check")
     }
 }
 
