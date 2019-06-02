@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		4AEE3C1A22A3DB7D00344AF6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEE3C1922A3DB7D00344AF6 /* AppDelegate.swift */; };
 		4AEE3C2122A3DB7E00344AF6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AEE3C2022A3DB7E00344AF6 /* Assets.xcassets */; };
-		4AEE3C2C22A3DBB300344AF6 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEE3C2B22A3DBB300344AF6 /* CollectionViewController.swift */; };
+		4AEE3C2C22A3DBB300344AF6 /* ColorCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEE3C2B22A3DBB300344AF6 /* ColorCollectionViewController.swift */; };
 		4AEE3C2E22A3DC1B00344AF6 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEE3C2D22A3DC1B00344AF6 /* Model.swift */; };
 /* End PBXBuildFile section */
 
@@ -18,7 +18,7 @@
 		4AEE3C1922A3DB7D00344AF6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4AEE3C2022A3DB7E00344AF6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4AEE3C2522A3DB7E00344AF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4AEE3C2B22A3DBB300344AF6 /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
+		4AEE3C2B22A3DBB300344AF6 /* ColorCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCollectionViewController.swift; sourceTree = "<group>"; };
 		4AEE3C2D22A3DC1B00344AF6 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -55,7 +55,7 @@
 				4AEE3C1922A3DB7D00344AF6 /* AppDelegate.swift */,
 				4AEE3C2022A3DB7E00344AF6 /* Assets.xcassets */,
 				4AEE3C2522A3DB7E00344AF6 /* Info.plist */,
-				4AEE3C2B22A3DBB300344AF6 /* CollectionViewController.swift */,
+				4AEE3C2B22A3DBB300344AF6 /* ColorCollectionViewController.swift */,
 				4AEE3C2D22A3DC1B00344AF6 /* Model.swift */,
 			);
 			path = UICollectionViewControllerWithAutoLayout;
@@ -131,7 +131,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4AEE3C2E22A3DC1B00344AF6 /* Model.swift in Sources */,
-				4AEE3C2C22A3DBB300344AF6 /* CollectionViewController.swift in Sources */,
+				4AEE3C2C22A3DBB300344AF6 /* ColorCollectionViewController.swift in Sources */,
 				4AEE3C1A22A3DB7D00344AF6 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

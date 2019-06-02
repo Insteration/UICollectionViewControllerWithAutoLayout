@@ -10,17 +10,15 @@ import UIKit
 
 private let reuseIdentifier = "Cell"
 
-class CollectionViewController: UICollectionViewController {
+class ColorCollectionViewController: UICollectionViewController {
     
     var items = [Item]()
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         collectionView.backgroundColor = .white
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
     }
     
     // MARK: UICollectionViewDataSource
@@ -31,8 +29,6 @@ class CollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-    
-        // Configure the cell
         cell.backgroundColor = items[indexPath.row].color
         return cell
     }
@@ -40,7 +36,7 @@ class CollectionViewController: UICollectionViewController {
 
 // MARK: Controllers
 
-class SmallViewController: CollectionViewController {
+class SmallViewController: ColorCollectionViewController {
     
     init() {
         let layout = UICollectionViewFlowLayout()
@@ -55,8 +51,6 @@ class SmallViewController: CollectionViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: Navigation
-    
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let bigVC = BigViewController()
         bigVC.items = items
@@ -64,7 +58,7 @@ class SmallViewController: CollectionViewController {
     }
 }
 
-class BigViewController: CollectionViewController {
+class BigViewController: ColorCollectionViewController {
     
     init() {
         let layout = UICollectionViewFlowLayout()
@@ -84,10 +78,10 @@ class BigViewController: CollectionViewController {
 }
 
 
-extension CollectionViewController: UINavigationControllerDelegate {
+extension ColorCollectionViewController: UINavigationControllerDelegate {
     
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-        guard let collectionVC = viewController as? CollectionViewController else { return }
+        guard let collectionVC = viewController as? ColorCollectionViewController else { return }
         collectionVC.collectionView?.delegate = collectionVC
         collectionVC.collectionView?.dataSource = collectionVC
     }
