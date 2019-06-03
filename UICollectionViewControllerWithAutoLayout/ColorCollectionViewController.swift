@@ -13,6 +13,7 @@ private let reuseIdentifier = "Cell"
 class ColorCollectionViewController: UICollectionViewController {
     
     var items = [Item]()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,8 +49,9 @@ class SmallViewController: ColorCollectionViewController {
         layout.itemSize = CGSize(width: 50, height: 50)
         super.init(collectionViewLayout: layout)
         useLayoutToLayoutNavigationTransitions = false
-        title = "Small cells"
+        title = "Small Cells"
         items = (0...90).map { _ in Item(color: .random(), title:   String(Int.random(in: 0...50))) }
+
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -69,9 +71,8 @@ class BigViewController: ColorCollectionViewController {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: 100, height: 100)
         super.init(collectionViewLayout: layout)
-        title = "Big cells"
+        title = "Big Cells"
         useLayoutToLayoutNavigationTransitions = true
-        print("Big")
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -79,7 +80,28 @@ class BigViewController: ColorCollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        navigationController?.popViewController(animated: true)
+        let veryBigVC = VeryBigController()
+        veryBigVC.items = items
+        navigationController?.pushViewController(veryBigVC, animated: true)
+    }
+}
+
+class VeryBigController: ColorCollectionViewController {
+    
+    init() {
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: 300, height: 300)
+        super.init(collectionViewLayout: layout)
+        title = "Very Big Cells"
+        useLayoutToLayoutNavigationTransitions = true
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        navigationController?.popToRootViewController(animated: true)
     }
 }
 
