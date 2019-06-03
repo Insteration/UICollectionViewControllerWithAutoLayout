@@ -21,7 +21,7 @@ class ColorCollectionViewController: UICollectionViewController {
         self.collectionView!.register(CollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
     }
     
-    // MARK: UICollectionViewDataSource
+    // MARK: - UICollectionViewDataSource
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return items.count
@@ -30,25 +30,17 @@ class ColorCollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
         
-        
-        //        let title = UILabel(frame: CGRect(x: 0, y: 0, width: cell.bounds.size.width, height: cell.bounds.size.height))
-        //        title.text = items[indexPath.row].title
-        //        title.textAlignment = .center
-        
         cell.backgroundColor = .white
         cell.layer.cornerRadius = 10
         cell.layer.borderWidth = 2
-        cell.layer.borderColor = UIColor.white.cgColor
+        cell.layer.borderColor = UIColor.random().cgColor
         cell.layer.shadowOpacity = 3
-        
         cell.backgroundColor = items[indexPath.row].color
-        //        cell.contentView.addSubview(title)
-        
         return cell
     }
 }
 
-// MARK: Controllers
+// MARK: - Controllers
 
 class SmallViewController: ColorCollectionViewController {
     
@@ -106,6 +98,7 @@ extension ColorCollectionViewController: UINavigationControllerDelegate {
 //Во-первых, в момент когда происходит магия, используется повторно один и тот же UICollectionView. Контроллер, на который осуществляется переход не создает свой собственный collection view. Это может иметь или не иметь значения для вашего приложения, но об этом полезно знать.
 //Во-вторых, root view controller (SmallViewController в нашем случае) по-прежнему будет установлен как delegate и dataSource, когда будет запущен новый view controller.
 
+// MARK: - Cell
 
 class CollectionViewCell: UICollectionViewCell {
     
@@ -113,7 +106,7 @@ class CollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         
         let title = UILabel(frame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height))
-        title.text = "Text"
+        title.text = randomString(length: Int.random(in: 0...4))
         title.textAlignment = .center
         title.textColor = .random()
         
