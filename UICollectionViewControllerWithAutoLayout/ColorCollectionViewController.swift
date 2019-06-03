@@ -81,9 +81,7 @@ class BigViewController: ColorCollectionViewController {
         super.init(collectionViewLayout: layout)
         title = "Big cells"
         useLayoutToLayoutNavigationTransitions = true
-        
-        
-        
+
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -111,13 +109,14 @@ extension ColorCollectionViewController: UINavigationControllerDelegate {
 
 class CollectionViewCell: UICollectionViewCell {
     
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        let title = UILabel(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
-        title.text = "Test"
+        let title = UILabel(frame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height))
+        title.text = "Text"
         title.textAlignment = .center
+        title.textColor = .random()
+        
         contentView.addSubview(title)
     }
     
