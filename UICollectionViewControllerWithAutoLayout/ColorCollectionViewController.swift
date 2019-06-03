@@ -30,7 +30,6 @@ class ColorCollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
         
-        cell.backgroundColor = .white
         cell.layer.cornerRadius = 10
         cell.layer.borderWidth = 2
         cell.layer.borderColor = UIColor.random().cgColor
@@ -50,7 +49,7 @@ class SmallViewController: ColorCollectionViewController {
         super.init(collectionViewLayout: layout)
         useLayoutToLayoutNavigationTransitions = false
         title = "Small cells"
-        items = (0...50).map { _ in Item(color: .random(), title:   String(Int.random(in: 0...50))) }
+        items = (0...90).map { _ in Item(color: .random(), title:   String(Int.random(in: 0...50))) }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -61,7 +60,6 @@ class SmallViewController: ColorCollectionViewController {
         let bigVC = BigViewController()
         bigVC.items = items
         navigationController?.pushViewController(bigVC, animated: true)
-        
     }
 }
 
@@ -73,7 +71,7 @@ class BigViewController: ColorCollectionViewController {
         super.init(collectionViewLayout: layout)
         title = "Big cells"
         useLayoutToLayoutNavigationTransitions = true
-
+        print("Big")
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -84,7 +82,6 @@ class BigViewController: ColorCollectionViewController {
         navigationController?.popViewController(animated: true)
     }
 }
-
 
 extension ColorCollectionViewController: UINavigationControllerDelegate {
     
@@ -106,7 +103,7 @@ class CollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         
         let title = UILabel(frame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height))
-        title.text = randomString(length: Int.random(in: 0...4))
+        title.text = randomString(length: Int.random(in: 1...4))
         title.textAlignment = .center
         title.textColor = .random()
         
