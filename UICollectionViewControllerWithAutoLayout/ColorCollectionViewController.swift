@@ -13,13 +13,39 @@ private let reuseIdentifier = "Cell"
 class ColorCollectionViewController: UICollectionViewController {
     
     var items = [Item]()
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         collectionView.backgroundColor = .white
         self.collectionView!.register(CollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        
+        collectionView.setCollectionViewLayout(CustomFlowLayout(), animated: false)
+        
+        let logoutBarButtonItem = UIBarButtonItem(title: "Add", style: .done, target: self, action: #selector(ko))
+        self.navigationItem.rightBarButtonItem  = logoutBarButtonItem
+    }
+    
+//    @IBAction func addItem(_ sender: UIBarButtonItem) {
+//        addItem()
+//        let indexPath = IndexPath(item: items.count - 1, section: 0)
+//        print("Index path is - \(indexPath)")
+//        myCollectionView.performBatchUpdates({
+//            self.myCollectionView.insertItems(at: [indexPath])
+//        }, completion: nil)
+//    }
+//
+//
+    private func addItem() {
+        items.append(Item(color: .random(), title: String(Int.random(in: 0...50))))
+    }
+    
+    @objc func ko() {
+        addItem()
+        let indexPath = IndexPath(item: items.count - 1, section: 0)
+        collectionView.performBatchUpdates({
+            collectionView.insertItems(at: [indexPath])
+        }, completion: nil)
     }
     
     // MARK: - UICollectionViewDataSource
@@ -50,7 +76,7 @@ class SmallViewController: ColorCollectionViewController {
         super.init(collectionViewLayout: layout)
         useLayoutToLayoutNavigationTransitions = false
         title = "Small Cells"
-        items = (0...90).map { _ in Item(color: .random(), title:   String(Int.random(in: 0...50))) }
+        items = (0...23).map { _ in Item(color: .random(), title: String(Int.random(in: 0...50))) }
 
     }
     
@@ -105,18 +131,6 @@ class VeryBigController: ColorCollectionViewController {
     }
 }
 
-extension ColorCollectionViewController: UINavigationControllerDelegate {
-    
-    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-        guard let collectionVC = viewController as? ColorCollectionViewController else { return }
-        collectionVC.collectionView?.delegate = collectionVC
-        collectionVC.collectionView?.dataSource = collectionVC
-    }
-}
-
-//Во-первых, в момент когда происходит магия, используется повторно один и тот же UICollectionView. Контроллер, на который осуществляется переход не создает свой собственный collection view. Это может иметь или не иметь значения для вашего приложения, но об этом полезно знать.
-//Во-вторых, root view controller (SmallViewController в нашем случае) по-прежнему будет установлен как delegate и dataSource, когда будет запущен новый view controller.
-
 // MARK: - Cell
 
 class CollectionViewCell: UICollectionViewCell {
@@ -134,5 +148,53 @@ class CollectionViewCell: UICollectionViewCell {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+// MARK: - Extensions
+
+extension ColorCollectionViewController: UINavigationControllerDelegate {
+    
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        guard let collectionVC = viewController as? ColorCollectionViewController else { return }
+        collectionVC.collectionView?.delegate = collectionVC
+        collectionVC.collectionView?.dataSource = collectionVC
+    }
+}
+
+//Во-первых, в момент когда происходит магия, используется повторно один и тот же UICollectionView. Контроллер, на который осуществляется переход не создает свой собственный collection view. Это может иметь или не иметь значения для вашего приложения, но об этом полезно знать.
+//Во-вторых, root view controller (SmallViewController в нашем случае) по-прежнему будет установлен как delegate и dataSource, когда будет запущен новый view controller.
+
+class CustomFlowLayout: UICollectionViewFlowLayout {
+    
+    var insertIndexPaths = [IndexPath]()
+    
+    override func prepare(forCollectionViewUpdates updateItems: [UICollectionViewUpdateItem]) {
+        super.prepare(forCollectionViewUpdates: updateItems)
+        
+        insertIndexPaths.removeAll()
+        
+        for update in updateItems {
+            if let indexPath = update.indexPathAfterUpdate, update.updateAction == .insert {
+                insertIndexPaths.append(indexPath)
+            }
+        }
+    }
+    
+    override func finalizeCollectionViewUpdates() {
+        super.finalizeCollectionViewUpdates()
+        
+        insertIndexPaths.removeAll()
+    }
+    
+    override func initialLayoutAttributesForAppearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        let attributes = super.initialLayoutAttributesForAppearingItem(at: itemIndexPath)
+        
+        if insertIndexPaths.contains(itemIndexPath) {
+            attributes?.alpha = 0.0
+            attributes?.transform = CGAffineTransform(translationX: 0, y: 500)
+        }
+        
+        return attributes
     }
 }
