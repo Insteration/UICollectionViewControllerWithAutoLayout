@@ -18,25 +18,31 @@ class ColorCollectionViewController: UICollectionViewController {
         super.viewDidLoad()
         
         collectionView.backgroundColor = .white
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView!.register(CollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
     }
     
     // MARK: UICollectionViewDataSource
-
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return items.count
     }
-
+    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
         
         
-        let title = UILabel(frame: CGRect(x: 0, y: 0, width: cell.bounds.size.width, height: cell.bounds.size.height))
-        title.text = items[indexPath.row].title
-        title.textAlignment = .center
-
+        //        let title = UILabel(frame: CGRect(x: 0, y: 0, width: cell.bounds.size.width, height: cell.bounds.size.height))
+        //        title.text = items[indexPath.row].title
+        //        title.textAlignment = .center
+        
+        cell.backgroundColor = .white
+        cell.layer.cornerRadius = 10
+        cell.layer.borderWidth = 2
+        cell.layer.borderColor = UIColor.white.cgColor
+        cell.layer.shadowOpacity = 3
+        
         cell.backgroundColor = items[indexPath.row].color
-        cell.contentView.addSubview(title)
+        //        cell.contentView.addSubview(title)
         
         return cell
     }
@@ -63,7 +69,7 @@ class SmallViewController: ColorCollectionViewController {
         let bigVC = BigViewController()
         bigVC.items = items
         navigationController?.pushViewController(bigVC, animated: true)
-
+        
     }
 }
 
@@ -76,8 +82,8 @@ class BigViewController: ColorCollectionViewController {
         title = "Big cells"
         useLayoutToLayoutNavigationTransitions = true
         
-
-
+        
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -101,3 +107,21 @@ extension ColorCollectionViewController: UINavigationControllerDelegate {
 
 //Во-первых, в момент когда происходит магия, используется повторно один и тот же UICollectionView. Контроллер, на который осуществляется переход не создает свой собственный collection view. Это может иметь или не иметь значения для вашего приложения, но об этом полезно знать.
 //Во-вторых, root view controller (SmallViewController в нашем случае) по-прежнему будет установлен как delegate и dataSource, когда будет запущен новый view controller.
+
+
+class CollectionViewCell: UICollectionViewCell {
+    
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        let title = UILabel(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+        title.text = "Test"
+        title.textAlignment = .center
+        contentView.addSubview(title)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
