@@ -16,7 +16,7 @@ class ColorCollectionViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         collectionView.backgroundColor = .white
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
     }
@@ -30,11 +30,14 @@ class ColorCollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
         
-        let title = UILabel(frame: CGRect(x: 0, y: 0, width: cell.bounds.size.width, height: 40))
+        
+        let title = UILabel(frame: CGRect(x: 0, y: 0, width: cell.bounds.size.width, height: cell.bounds.size.height))
         title.text = items[indexPath.row].title
+        title.textAlignment = .center
 
         cell.backgroundColor = items[indexPath.row].color
         cell.contentView.addSubview(title)
+        
         return cell
     }
 }
@@ -60,6 +63,7 @@ class SmallViewController: ColorCollectionViewController {
         let bigVC = BigViewController()
         bigVC.items = items
         navigationController?.pushViewController(bigVC, animated: true)
+
     }
 }
 
@@ -71,6 +75,9 @@ class BigViewController: ColorCollectionViewController {
         super.init(collectionViewLayout: layout)
         title = "Big cells"
         useLayoutToLayoutNavigationTransitions = true
+        
+
+
     }
     
     required init?(coder aDecoder: NSCoder) {
