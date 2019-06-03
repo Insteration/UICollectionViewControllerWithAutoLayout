@@ -65,13 +65,12 @@ class SmallViewController: ColorCollectionViewController {
         super.init(collectionViewLayout: layout)
         useLayoutToLayoutNavigationTransitions = false
         title = "Small Cells"
-        items = (0...23).map { _ in Item(color: .random(), title: String(Int.random(in: 0...50))) }
+        items = (0...Int.random(in: 1...15)).map { _ in Item(color: .random(), title: String(Int.random(in: 0...50))) }
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
