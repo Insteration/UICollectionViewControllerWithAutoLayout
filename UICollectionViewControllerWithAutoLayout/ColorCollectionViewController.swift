@@ -29,7 +29,12 @@ class ColorCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        
+        let title = UILabel(frame: CGRect(x: 0, y: 0, width: cell.bounds.size.width, height: 40))
+        title.text = items[indexPath.row].title
+
         cell.backgroundColor = items[indexPath.row].color
+        cell.contentView.addSubview(title)
         return cell
     }
 }
@@ -44,7 +49,7 @@ class SmallViewController: ColorCollectionViewController {
         super.init(collectionViewLayout: layout)
         useLayoutToLayoutNavigationTransitions = false
         title = "Small cells"
-        items = (0...50).map { _ in Item(color: .random()) }
+        items = (0...50).map { _ in Item(color: .random(), title:   String(Int.random(in: 0...50))) }
     }
     
     required init?(coder aDecoder: NSCoder) {

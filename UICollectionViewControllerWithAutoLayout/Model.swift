@@ -10,6 +10,7 @@ import UIKit
 
 struct Item {
     var color: UIColor
+    var title: String
 }
 
 extension UIColor {
